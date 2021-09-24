@@ -1,1 +1,7 @@
-<p>cart-list works!</p>
+<h3 *ngIf="isEmpty; else cartBlock">Cart is empty!</h3>
+<ng-template #cartBlock>
+    <ul>
+        <li *ngFor="let product of products; trackBy: trackById">{{product.id}}-{{product.name}}</li>
+    </ul>
+</ng-template>
+<button (click)="onRemove()">Remove</button>
