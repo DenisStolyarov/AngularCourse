@@ -6,8 +6,6 @@ import { Product } from '../models/product.model';
 })
 export class ProductsService {
 
-  constructor() { }
-
   getProducts(): Array<Product> {
     return [
       new Product(1, 'Telephone', 'Useful gadget for communication', 100),
