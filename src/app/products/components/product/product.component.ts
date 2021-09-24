@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Product } from '../../models/product.model';
+import { ProductModel } from '../../models/product.model';
 
 @Component({
   selector: 'app-product',
@@ -8,7 +8,7 @@ import { Product } from '../../models/product.model';
 })
 export class ProductComponent {
   @Input()
-  product!: Product;
+  product!: ProductModel;
 
   onAddToCart(){
     console.log(`Buy product: ${this.product.id}`)
