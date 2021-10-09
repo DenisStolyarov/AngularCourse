@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { ProductEntity } from 'src/app/core/models/product-entity';
 import { ProductModel } from '../../models/product.model';
 
 @Component({
@@ -10,7 +11,12 @@ export class ProductComponent {
   @Input()
   product!: ProductModel;
 
+  @Output()
+  addToCart: EventEmitter<ProductEntity> = new EventEmitter<ProductEntity>();
+
   onAddToCart(){
-    console.log(`Buy product: ${this.product.id}`)
+    if (this.product.isAvailable) {
+      this.addToCart.emit(this.product);
+    }
   }
 }

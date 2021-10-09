@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
+import { ProductEntity } from 'src/app/core/models/product-entity';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  products: Array<any> = [
-    { "id": 1, "name": "bill" },
-    { "id": 2, "name": "bob" },
-    { "id": 3, "name": "billy" }
-  ];
+  products: Array<ProductEntity> = [];
+
+  add(product: ProductEntity) {
+    this.products.push(product);
+  }
 
   remove() {
     this.products.pop();

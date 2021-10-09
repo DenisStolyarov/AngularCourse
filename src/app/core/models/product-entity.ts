@@ -6,5 +6,4 @@ export interface ProductEntity {
     description: string,
     price: number,
     category: ProductCategory,
-    isAvailable: boolean,
 }
