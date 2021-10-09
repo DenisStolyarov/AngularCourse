@@ -20,7 +20,7 @@ import { SharedModule } from './shared/shared.module';
     ProductsModule,
     CartModule,
     OrdersModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
