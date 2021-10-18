@@ -1,7 +1,14 @@
 <h3 *ngIf="isEmpty; else cartBlock">Cart is empty!</h3>
 <ng-template #cartBlock>
     <ul>
-        <li *ngFor="let product of products; trackBy: trackById">{{product.id}}-{{product.name}}</li>
+        <li>Total Sum: {{totalSum}}</li>
+        <li>Total Quantity: {{totalQuantity}}</li>
     </ul>
+    <app-cart-item 
+        *ngFor="let cartItem of cartItems; trackBy: trackById" 
+        [cartItem]="cartItem"
+        (increaseQuantity)="onIncreaseCount($event)" 
+        (decreaseQuantity)="onDecreaseCount($event)"
+        (remove)="onRemove($event)">
+    </app-cart-item>
 </ng-template>
-<button (click)="onRemove()">Remove</button>

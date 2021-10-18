@@ -1,6 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, DoCheck, IterableChangeRecord, IterableChanges, IterableDiffer, IterableDiffers, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CommunicatorService } from 'src/app/core/services/communicator.service';
+import { CartItemModel } from '../../models/cart-item.model';
 import { CartService } from '../../services/cart.service';
 
 @Component({
@@ -12,12 +13,18 @@ export class CartListComponent implements OnInit, OnDestroy {
 
   private subscription!: Subscription;
 
-  public get isEmpty(): boolean {
-    return this.cartService.products.length == 0;
+  cartItems!: Array<CartItemModel>;
+
+  get isEmpty(): boolean {
+    return this.cartService.isEmptyCart;
   }
 
-  public get products(): Array<any> {
-    return this.cartService.products;
+  get totalSum(): number {
+    return this.cartService.totalSum;
+  }
+
+  get totalQuantity(): number {
+    return this.cartService.totalQuantity;
   }
 
   constructor(
@@ -26,20 +33,30 @@ export class CartListComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.subscription = this.communicatorService.channel.subscribe(
-      data => this.cartService.add(data)
+    this.subscription = this.communicatorService.currentProduct.subscribe(
+      data => this.cartService.addProduct(data)
     );
+
+    this.cartItems = this.cartService.cartProducts;
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  onRemove() {
-    this.cartService.remove();
+  onRemove(cartItem: CartItemModel) {
+    this.cartService.removeProduct(cartItem);
   }
 
-  trackById(index: number, item: any): number {
-    return item.id;
+  onIncreaseCount(cartItem: CartItemModel) {
+    this.cartService.increaseQuantity(cartItem);
+  }
+
+  onDecreaseCount(cartItem: CartItemModel) {
+    this.cartService.decreaseQuantity(cartItem);
+  }
+
+  trackById(index: number, item: CartItemModel): number {
+    return item.product.id;
   }
 }

@@ -6,9 +6,11 @@ import { ProductEntity } from '../models/product-entity';
   providedIn: 'root'
 })
 export class CommunicatorService {
-  channel = new Subject<ProductEntity>();
+  private productSource = new Subject<ProductEntity>();
+
+  currentProduct = this.productSource.asObservable();
 
   publish(data: ProductEntity): void {
-    this.channel.next(data);
+    this.productSource.next(data);
   }
 }

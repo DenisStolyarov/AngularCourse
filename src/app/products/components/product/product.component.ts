@@ -5,7 +5,7 @@ import { ProductModel } from '../../models/product.model';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  styleUrls: ['./product.component.css'],
 })
 export class ProductComponent {
   @Input()
@@ -14,7 +14,7 @@ export class ProductComponent {
   @Output()
   addToCart: EventEmitter<ProductEntity> = new EventEmitter<ProductEntity>();
 
-  onAddToCart(){
+  onAddToCart() {
     if (this.product.isAvailable) {
       this.addToCart.emit(this.product);
     }
