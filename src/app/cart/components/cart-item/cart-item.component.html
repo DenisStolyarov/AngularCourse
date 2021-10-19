@@ -1,8 +1,8 @@
-<div>
+<div appHighlight>
     <h3>{{cartItem.product.name}}</h3>
     <p>{{cartItem.product.price}}</p>
     <button (click)="onIncreaseCount()">+</button>
     <p>{{cartItem.count}}</p>
     <button (click)="onDecreaseCount()">-</button>
+    <button (click)="onRemove()">Remove</button>
 </div>
-<button (click)="onRemove()">Remove</button>

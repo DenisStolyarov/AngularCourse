@@ -1,0 +1,12 @@
+div {
+    width: 250px;
+    height: 180px;
+}
+
+.active {
+    border: 1px solid red;
+}
+
+.inactive {
+    border: 1px solid black;
+}
